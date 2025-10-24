@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>荧光笔HY1002产品碳足迹</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: "PingFang SC", "Microsoft Yahei", sans-serif;
+			}
+
+			body {
+				background-color: #f9faf0;
+				padding: 20px;
+			}
+
+			.container {
+				max-width: 375px;
+				margin: 0 auto;
+				background-color: #fff;
+				border-radius: 8px;
+				box-shadow: 0 2px 10px #e6f6f0;
+				overflow: hidden;
+			}
+
+			.header {
+				padding: 15px;
+			}
+
+			.header h1 {
+				font-size: 18px;
+				color: #333;
+				line-height: 1.4;
+				margin-bottom: 8px;
+			}
+
+			.carbon-tag {
+				display: flex;
+				align-items: center;
+				font-size: 12px;
+				color: #666;
+				margin-bottom: 10px;
+			}
+
+			.carbon-tag .icon {
+				width: 16px;
+				height: 16px;
+				background-color: #e1ebe4;
+				border-radius: 3px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #5a8c59;
+				margin-right: 5px;
+			}
+
+			.product-img {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				background-color: #f5f8f0;
+			}
+
+			.product-img img {
+				height: auto;
+				margin-bottom: 10px;
+			}
+
+			.brand {
+				padding: 15px;
+				font-size: 14px;
+				color: #666;
+				border-bottom: 1px solid #eee;
+			}
+
+			.tabs {
+				display: flex;
+				padding: 10px 15px;
+				border-bottom: 1px solid #eee;
+				width: 100%;
+				display: flex;
+				justify-content: space-around;
+			}
+
+			.tab {
+				padding: 5px 10px;
+				font-size: 14px;
+				color: #666;
+				cursor: pointer;
+				transition: all 0.3s ease;
+			}
+
+			.tab.active {
+				color: #2c5e2e;
+				border-bottom: 2px solid #2c5e2e;
+				font-weight: bold;
+			}
+
+			.tab:hover {
+				color: #2c5e2e;
+			}
+
+			.tab-content {
+				display: none;
+				padding: 15px;
+				animation: fadeIn 0.5s ease;
+			}
+
+			.tab-content.active {
+				display: block;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+				}
+
+				to {
+					opacity: 1;
+				}
+			}
+
+			.carbon-data {
+				padding: 15px 0px;
+			}
+
+			.data-item {
+				margin-bottom: 15px;
+			}
+
+			.data-item h3 {
+				font-size: 14px;
+				color: #666;
+				margin-bottom: 8px;
+			}
+
+			.active-reduce {
+				display: flex;
+				align-items: baseline;
+				margin-bottom: 10px;
+			}
+
+			.active-reduce .num {
+				font-size: 24px;
+				color: #333;
+				font-weight: bold;
+				margin-right: 5px;
+			}
+
+			.active-reduce .unit {
+				font-size: 14px;
+				color: #666;
+			}
+
+			.material-lowcarbon {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+
+			.material-lowcarbon .label {
+				font-size: 14px;
+				color: #666;
+			}
+
+			.material-lowcarbon .value {
+				font-size: 14px;
+				color: #333;
+			}
+
+			.carbon-distribution h3 {
+				margin-bottom: 10px;
+			}
+
+			.distribution-bar {
+				height: 8px;
+				background-color: #eaeaea;
+				border-radius: 4px;
+				margin-bottom: 5px;
+			}
+
+			.distribution-bar .fill {
+				height: 100%;
+				width: 100%;
+				background-color: #5a8c59;
+				border-radius: 4px;
+			}
+
+			.distribution-text {
+				display: flex;
+				justify-content: space-between;
+				font-size: 12px;
+				color: #666;
+			}
+
+			.share-link {
+				text-align: right;
+				margin-bottom: 15px;
+				font-size: 12px;
+				color: #5a8c59;
+			}
+
+			.share-link a {
+				color: #5a8c59;
+				text-decoration: none;
+			}
+
+			.footer-note {
+				font-size: 12px;
+				color: #999;
+				line-height: 1.5;
+				padding: 0 15px 15px;
+			}
+
+			.footer-logo {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 15px;
+				background-color: #f5f8f0;
+				font-size: 12px;
+				color: #666;
+			}
+
+			.footer-logo .ali-logo {
+				display: flex;
+				align-items: center;
+			}
+
+			.footer-logo .ali-logo img {
+				width: 20px;
+				height: 20px;
+				margin-right: 5px;
+			}
+
+			.footer-logo .url {
+				color: #999;
+			}
+
+			.trace-content {
+				padding: 15px 0px;
+			}
+
+			.trace-item {
+				margin-bottom: 55px;
+				width: 90%;
+				/* padding: 15px; */
+				box-shadow: 0 0 10px #eee;
+				border-radius: 10px;
+			}
+
+			.trace-item h3 {
+				font-size: 14px;
+				color: #666;
+				margin-bottom: 10px;
+			}
+
+			.trace-item p {
+				font-size: 14px;
+				color: #333;
+				line-height: 1.5;
+			}
+
+			.trace-steps {
+				margin-top: 15px;
+			}
+
+			.trace-step {
+				display: flex;
+				margin-bottom: 10px;
+				padding-bottom: 10px;
+				border-bottom: 1px solid #eee;
+				position: relative;
+			}
+
+			.trace-step:last-child {
+				border-bottom: none;
+			}
+
+			.step-number {
+				width: 100%;
+				height: 240px;
+				/* background-color: #5a8c59; */
+				color: #666;
+				padding: 10px;
+
+				font-size: 12px;
+				margin-right: 10px;
+				border-radius: 10px;
+				padding-left: 10px;
+
+			}
+
+			.step-content {
+				flex: 1;
+				position: absolute;
+				right: 0px;
+				top: -70px
+			}
+
+			.step-content img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.step-content h4 {
+				font-size: 14px;
+				color: #333;
+				margin-bottom: 5px;
+			}
+
+			.step-content p {
+				font-size: 12px;
+				color: #666;
+			}
+
+			.record-item {
+				display: flex;
+				align-items: flex-start;
+				margin-bottom: 20px;
+				padding: 10px;
+				border-bottom: 1px solid #eee;
+			}
+
+			.item-icon {
+				margin-right: 12px;
+				font-size: 24px;
+				color: #007bff;
+			}
+
+			.item-content {
+				flex: 1;
+			}
+
+			.item-title {
+				font-weight: 600;
+				margin-bottom: 4px;
+			}
+
+			.item-company {
+				color: #666;
+				font-size: 14px;
+				margin-bottom: 6px;
+			}
+
+			.item-info {
+				font-size: 14px;
+				margin-bottom: 3px;
+			}
+
+			.item-carbon {
+				font-weight: bold;
+				color: #28a745;
+				border-radius: 20px;
+				opacity: .6;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+			}
+
+			.item-img {
+				width: 80px;
+				height: 80px;
+				object-fit: cover;
+				cursor: pointer;
+				border-radius: 4px;
+				transition: transform 0.2s;
+
+			}
+
+			.item-img:hover {
+				transform: scale(1.05);
+			}
+
+			.modal-img {
+				max-width: 100%;
+				max-height: 80vh;
+				margin: 0 auto;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 头部标题区 -->
+			<div class="header">
+				<h1 style="font-size: 40px;">
+					
+					<div>荧光笔HY1002</div>
+					<div style="font-size: 32px;color: #28a745">Highlighter HY1002</div>
+				<div>产品碳足迹</div>
+				<div style="font-size: 32px;color: #28a745">Product carbon footprint</div>
+				</h1>
+				
+			</div>
+
+			<!-- 产品图片区 -->
+			<div class="product-img">
+				<img src="img/6.jpg" style="width: 100%;" alt="KACO联名中性笔">
+			</div>
+
+			<!-- 品牌方信息 -->
+			<div class="brand" style="font-size: 18px;">
+				<div>品牌方 <span style="font-size:14px;color: #28a745;">(Brand)</span>   TESCO</div>
+				
+			</div>
+
+			<!-- 选项卡 -->
+			<div class="tabs">
+				<div style="display: flex;flex-direction: column;align-items: center;">
+					<div class="tab active" data-tab="carbon-footprint" style="font-size: 18px;">碳足迹</div>
+					<div style="font-size: 18px;color: #28a745;font-weight: bold;">Cabon Footprint</div>
+				</div>
+				<div style="display: flex;flex-direction: column;align-items: center;">
+					<div class="tab" data-tab="carbon-trace" style="font-size: 18px;">碳溯源</div>
+					<div style="font-size: 18px;color: #28a745;font-weight: bold;">Carbon traceability</div>
+				</div>
+				
+			</div>
+
+			<!-- 碳足迹内容 -->
+			<div class="tab-content active" id="carbon-footprint">
+				<div class="carbon-data">
+					<div style="padding: 15px;box-shadow: 0 0 10px #eee;border-radius: 10px;">
+						<div class="data-item">
+							<h3 style="font-size: 20px;font-weight: bold;">产品碳足迹</h3>
+							<p style="font-size:20px;color: #28a745;font-weight: bold;">Product Carbon Footprint</p>
+							
+							<div class="active-reduce" style="font-size: 20px;">
+
+								<div class="unit" style="font-size: 16px;display: flex;"><p style="font-size:34px;margin-right: 5px;font-weight: bold;">0.14551667</p>  kgCO2eq</div>
+							</div>
+						</div>
+
+						<div class="data-item">
+							<div class="material-lowcarbon">
+								<div style="width: 15px;height: 15px;border-radius: 50%;background: #5a8c59;"></div>
+								<span class="label" style="font-size: 18px;margin-left: -70px;">原料减碳 </span>
+								
+								<span class="value" style="font-size: 18px;">100.00%</span>
+							</div>
+							<p style="font-size:20px;color: #28a745;font-weight: bold;">Low-Carbon Raw Materials</p>
+						</div>
+					</div>
+
+					<div
+						style="padding: 15px;box-shadow: 0 0 10px #eee;border-radius: 10px;margin-top: 20px;margin-bottom: 20px;">
+						<div class="data-item" style="margin-top: 30px;">
+							<h3 style="font-size: 18px;">碳排放分布</h3>
+							<p style="margin-bottom: 10px;font-size: 20px;color: #28a745;font-weight: bold;">Carbon Emission Distribution</p>
+							<div class="distribution-bar">
+								<div class="fill"></div>
+							</div>
+							<div class="distribution-text" style="margin-top: 10px;">
+								<span style="font-size: 18px;">再生材料生产</span>
+								
+								<span style="font-size: 18px;">100%</span>
+							</div>
+							<p style="margin-bottom: 20px;font-size: 20px;color: #28a745;font-weight: bold;">Recycled material for production</p>
+						</div>
+						<!-- <div class="share-link">
+                        <a href="#">分享碳足迹</a>
+                    </div> -->
+					</div>
+
+					<div class="footer-note" style="font-size: 16px;">
+						以上产品碳足迹数据经BV认证机构认证。附：<a href="./img/yin.pdf" target="_blank"
+							style="color: blue;">荧光笔(HY1002)产品碳足迹报告</a>
+					</div>
+					<div class="footer-note" style="font-size: 14px;color: #28a745;">
+						The carbon footprint data of the above products has been certified by Bureau Veritas. 
+											Attached: Carbon Footprint Report of Highlighter (HY1002) Product
+					</div>
+					
+				</div>
+			</div>
+
+			<!-- 碳溯源内容 -->
+			<div class="tab-content" id="carbon-trace">
+				<div class="trace-content">
+
+
+					<div style="display: flex;width: 100%;margin-top: 30px;">
+						<div
+							style="width: 10%;margin-right: 6px;display: flex;flex-direction: column;align-items: center;">
+							<img src="img/8.png" style="width: 30px;height: 30px;" />
+							<div style="width: 2px;height: 200px;background: #eee;"></div>
+						</div>
+						<div class="trace-item">
+
+							<div class="trace-steps">
+								<div class="trace-step">
+									<div class="step-number">
+										<div style="margin-top: 10px;font-size: 20px;color: #333;">废旧塑料回收</div>
+										<p style="font-size: 18px;color: #28a745;font-weight: bold;">Waste Plastic Recycling</p>
+										<div style="margin-top: 10px;font-size: 16px">上海奥塞尔材料科技有限公司</div>
+										<p style="font-size: 12px;color: #28a745;">Shanghai Ausell Material Technology Co., Ltd.</p>
+										<div style="margin-top: 10px;color: #666;">时段<span style="font-size: 12px;color: #28a745;">(Period)</span>：2024.1-2024.12</div>
+										<div style="margin-top: 10px;color: #666;margin-bottom: 20px;">回收量<span style="font-size: 12px;color: #28a745;">(Recycled Volume)</span>：1400吨<span style="font-size: 12px;color: #28a745;">(Tons)</span></div>
+										<div
+											style="margin-top: 40px;display: flex;justify-content: space-between; width: 98%;margin: 0 auto;border-radius: 20px;background: #f2faf7;padding: 10px 20px;">
+											<div>碳排<span style="font-size: 12px;color: #28a745;">(Carbon emissions)</span>： </div>
+											<div>247.87tCO2e</div>
+										</div>
+									</div>
+									<div class="step-content" style="width:90px;height: 90px;">
+										<img src="img/55f62d80e909571ba28487d3dcab89bb.png" />
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+
+					</div>
+
+
+					<div style="display: flex;width: 100%;margin-top: 30px;">
+						<div
+							style="width: 10%;margin-right: 6px;display: flex;flex-direction: column;align-items: center;">
+							<img src="img/p.png" style="width: 30px;height: 30px;" />
+							<div style="width: 2px;height: 200px;background: #eee;"></div>
+						</div>
+						<div class="trace-item">
+
+							<div class="trace-steps">
+								<div class="trace-step">
+									<div class="step-number">
+										<div style="margin-top: 10px;font-size: 18px;color: #333;">废旧塑料破碎及运输</div>
+										<p style="font-size: 18px;color: #28a745;font-weight: bold;">Waste Plastic Crushing and Transportation</p>
+										<div style="margin-top: 10px;font-size: 16px">上海奥塞尔材料科技有限公司</div>
+										<p style="font-size: 12px;color: #28a745;">Shanghai Ausell Material Technology Co., Ltd.</p>
+										<div style="margin-top: 10px;color: #666;">时段<span style="font-size: 12px;color: #28a745;">(Period)</span>： 2024.1-2024.12</div>
+										<div style="margin-top: 10px;color: #666;margin-bottom: 20px;">运输重量<span style="font-size: 12px;color: #28a745;">(Transport Weight)</span>：1400吨<span style="font-size: 12px;color: #28a745;">(Tons)</span></div>
+										<div
+											style="margin-top: 40px;display: flex;justify-content: space-between; width: 98%;margin: 0 auto;border-radius: 20px;background: #f2faf7;padding: 10px 20px;">
+											<div>碳排<span style="font-size: 12px;color: #28a745;">(Carbon emissions)</span>：</div>
+											<div>166.75tCO2e</div>
+										</div>
+									</div>
+									<div class="step-content" style="width:90px;height: 90px;">
+										<img src="img/3.png" />
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+
+
+					<div style="display: flex;width: 100%;margin-top: 30px;">
+						<div
+							style="width: 10%;margin-right: 6px;display: flex;flex-direction: column;align-items: center;">
+							<img src="img/p.png" style="width: 30px;height: 30px;" />
+							<div style="width: 2px;height: 200px;background: #eee;"></div>
+						</div>
+						<div class="trace-item">
+
+							<div class="trace-steps">
+								<div class="trace-step">
+									<div class="step-number">
+										<div style="margin-top: 10px;font-size: 18px;color: #333;">回收造粒生产</div>
+										<p style="font-size: 18px;color: #28a745;font-weight: bold;">Recycled Granulation Production</p>
+										<div style="margin-top: 10px;font-size: 16px">上海奥塞尔材料科技有限公司</div>
+										<p style="font-size: 12px;color: #28a745;">Shanghai Ausell Material Technology Co., Ltd.</p>
+										<div style="margin-top: 10px;color: #666;">时段<span style="font-size: 12px;color: #28a745;">(Period)</span>： 2024.1-2024.12</div>
+										<div style="margin-top: 10px;color: #666;margin-bottom: 20px;">造粒产量<span style="font-size: 12px;color: #28a745;">(Granulation Output)</span>：1380吨<span style="font-size: 12px;color: #28a745;">(Tons)</span></div>
+										<div
+											style="margin-top: 40px;display: flex;justify-content: space-between; width: 98%;margin: 0 auto;border-radius: 20px;background: #f2faf7;padding: 10px 20px;">
+											<div>碳排<span style="font-size: 12px;color: #28a745;">(Carbon emissions)</span>：</div>
+											<div>320.71tCO2e</div>
+										</div>
+									</div>
+									<div class="step-content" style="width:90px;height: 90px;">
+										<img src="img/4.png" />
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+					<div style="display: flex;width: 100%;margin-top: 30px;">
+						<div
+							style="width: 10%;margin-right: 6px;display: flex;flex-direction: column;align-items: center;">
+							<img src="img/p.png" style="width: 30px;height: 30px;" />
+							<div style="width: 2px;height: 200px;background: #eee;"></div>
+						</div>
+						<div class="trace-item">
+
+							<div class="trace-steps">
+								<div class="trace-step">
+									<div class="step-number">
+										<div style="margin-top: 10px;font-size: 18px;color: #333;">回收造粒运输</div>
+										<p style="font-size: 18px;color: #28a745;font-weight: bold;">Recycled Granulation Transportation</p>
+										<div style="margin-top: 10px;font-size: 16px">上海奥塞尔材料科技有限公司</div>
+										<p style="font-size: 12px;color: #28a745;">Shanghai Ausell Material Technology Co., Ltd.</p>
+										<div style="margin-top: 10px;color: #666;">时段<span style="font-size: 12px;color: #28a745;">(Period)</span>： 2024.1-2024.12</div>
+										<div style="margin-top: 10px;color: #666;margin-bottom: 20px;">运输量<span style="font-size: 12px;color: #28a745;">(Freight volume)</span>：1372吨<span style="font-size: 12px;color: #28a745;">(Tons)</span></div>
+										<div
+											style="margin-top: 40px;display: flex;justify-content: space-between; width: 98%;margin: 0 auto;border-radius: 20px;background: #f2faf7;padding: 10px 20px;">
+											<div>碳排<span style="font-size: 12px;color: #28a745;">(Carbon emissions)</span>：</div>
+											<div>5.14tCO2e</div>
+										</div>
+									</div>
+									<div class="step-content" style="width:90px;height: 90px;">
+										<img src="img/5.png" />
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+
+
+					<div style="display: flex;width: 100%;margin-top: 30px;">
+						<div
+							style="width: 10%;margin-right: 6px;display: flex;flex-direction: column;align-items: center;">
+							<img src="img/p.png" style="width: 30px;height: 30px;" />
+							<div style="width: 2px;height: 200px;background: #eee;"></div>
+						</div>
+						<div class="trace-item">
+
+							<div class="trace-steps">
+								<div class="trace-step">
+									<div class="step-number" style="height: 290px;">
+										<div style="margin-top: 10px;font-size: 18px;color: #333;">利用回收粒子生产PCR材料</div>
+										<span style="font-size: 18px;color: #28a745;font-weight: bold;">Production of PCR Materials Using Recycled Pellets</span>
+										<div style="margin-top: 10px;font-size: 16px">上海奥塞尔材料科技有限公司</div>
+										<span style="font-size: 12px;color: #28a745;">Shanghai Ausell Material Technology Co., Ltd.</span>
+										<div style="margin-top: 10px;">时段<span style="font-size: 12px;color: #28a745;">(Period)</span>： 2024.1-2024.12</div>
+										<div style="margin-top: 10px;margin-bottom: 20x;">生产产量<span style="margin-top: 10px;margin-bottom: 20x;color: #28a745;font-size: 10px;">(Production Output)</span>：70吨<span style="color: #28a745;font-size: 12px;">(Tons)</span></div>
+										
+										<div
+											style="display: flex;justify-content: space-between; width: 100%;margin: 0 auto;border-radius: 20px;background: #f2faf7;padding: 0px 20px;padding-bottom: 15px;margin-top: 20px;">
+											<div
+												style="padding-right: 15px;  margin-top: 10px;display: flex;flex-direction: column;align-items: center;justify-content: space-around;border-right: 2px solid #28a745;">
+												<div>碳排<p style="font-size: 10px;color: #28a745;">(Carbon emissions)</p></div>
+												<div style="margin-top: 10px;">109.2tCO2e</div>
+											</div>
+											<div
+												style="margin-top: 10px;display: flex;flex-direction: column;align-items: center;justify-content: space-around;">
+												<div style="display: flex;align-items: center">
+													<img src="img/ye.png" style="20px;height: 20px;margin-right: 6px;"/>
+													<div>减排<p style="font-size: 10px;color: #28a745;">(Emission reduction)</p></div>
+												</div>
+												
+												<div style="margin-top: 10px;">91tCO2e</div>
+											</div>
+										</div>
+
+									</div>
+									<div class="step-content" style="width:90px;height: 90px;">
+										<img src="img/6.png" />
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+				
+
+
+					<div style="display: flex;width: 100%;margin-top: 40px;">
+						<div
+							style="width: 10%;margin-right: 6px;display: flex;flex-direction: column;align-items: center;">
+							<img src="img/p.png" style="width: 30px;height: 30px;" />
+							<div style="width: 2px;height: 200px;background: #eee;"></div>
+						</div>
+						<div class="trace-item" style="width: 90%;">
+
+							<div class="trace-steps">
+								<div class="trace-step">
+									<div class="step-number">
+										<div style="margin-top: 10px;font-size: 18px;color: #333;">利用 PCR材料生产产品</div>
+										<p style="font-size: 18px;color: #28a745;font-weight: bold;">Product Manufacturing Using PCR Materials</p>
+										<div style="margin-top: 10px;font-size: 16px;color: #333;">TESCO</div>
+										<div style="margin-top: 10px;">时段<span style="font-size: 12px;color: #28a745;">(Period)</span>： 2024.1-2024.12</div>
+										<div style="margin-top: 10px;">生产产量<span style="font-size: 12px;color: #28a745;">(Production Output)</span>： 77400套<span style="font-size: 12px;color: #28a745;">(Sets)</span></div>
+										<div
+											style="display: flex;justify-content: space-between; width: 98%;margin: 0 auto;border-radius: 20px;background: #f2faf7;padding: 10px 20px;margin-top: 20px;">
+											<div>碳排<span style="font-size: 12px;color: #28a745;">(Carbon emissions)</span>：</div>
+											<div>11.26 tCO2e</div>
+										</div>
+									</div>
+									<div class="step-content" style="width: 90px;height: 90px;">
+										<img src="img/1.jpg" />
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+
+			<!-- 底部阿里云标识区 -->
+			<!-- <div class="footer-logo">
+            <div class="ali-logo">
+                <img src="https://via.placeholder.com/20x20?text=AliLogo" alt="阿里云">
+                阿里云 | 能耗宝
+            </div>
+            <div class="url">energy.aliyun.com</div>
+        </div> -->
+		</div>
+
+		<script>
+			// Tab切换功能
+			document.addEventListener('DOMContentLoaded', function() {
+				const tabs = document.querySelectorAll('.tab');
+				const tabContents = document.querySelectorAll('.tab-content');
+
+				tabs.forEach(tab => {
+					tab.addEventListener('click', function() {
+						// 移除所有tab的active类
+						tabs.forEach(t => t.classList.remove('active'));
+						// 添加当前tab的active类
+						this.classList.add('active');
+
+						// 隐藏所有tab内容
+						tabContents.forEach(content => content.classList.remove('active'));
+
+						// 显示对应的tab内容
+						const tabId = this.getAttribute('data-tab');
+						const activeContent = document.getElementById(tabId);
+						if (activeContent) {
+							activeContent.classList.add('active');
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
